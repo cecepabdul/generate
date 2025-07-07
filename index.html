@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Generator Undangan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #914d26;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #b36b35;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background-color: #a05c2a;
+    }
+    #outputBox {
+      margin-top: 2rem;
+      white-space: pre-line;
+      background: #fff3ea;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 5px solid #b36b35;
+    }
+    .copy-btn {
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Generate Link & Pesan Undangan</h2>
+    <input type="text" id="guestName" placeholder="Masukkan Nama Tamu (Contoh: Cecep)" />
+    <button onclick="generateMessage()">Buat Pesan</button>
+
+    <div id="outputBox" style="display: none;"></div>
+
+    <div class="copy-btn">
+      <button onclick="copyMessage()">Salin Pesan</button>
+    </div>
+  </div>
+
+  <script>
+    function generateMessage() {
+      const nameInput = document.getElementById("guestName").value.trim();
+      const guestName = nameInput || "Tamu Undangan";
+      const domain = "https://domain.com";
+      const encodedName = encodeURIComponent(guestName);
+      const url = `${domain}?to=${encodedName}`;
+
+      const message = `Kepada Yth.\nBapak/Ibu/Saudara/i\n*${guestName.toUpperCase()}*\n_________________\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara kami.\n\n*Berikut link undangan kami*, untuk info lengkap dari acara, bisa kunjungi :\n\n${url}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.\n\nTerima Kasih\n\nHormat kami,\nSatrio dan Nadira`;
+
+      const output = document.getElementById("outputBox");
+      output.innerText = message;
+      output.style.display = "block";
+    }
+
+    function copyMessage() {
+      const output = document.getElementById("outputBox");
+      const range = document.createRange();
+      range.selectNode(output);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      try {
+        document.execCommand("copy");
+        alert("Pesan berhasil disalin!");
+      } catch (err) {
+        alert("Gagal menyalin pesan.");
+      }
+      window.getSelection().removeAllRanges();
+    }
+  </script>
+
+</body>
+</html>
