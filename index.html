@@ -61,7 +61,7 @@
 
   <div class="container">
     <h2>Generate Link & Pesan Undangan</h2>
-    <input type="text" id="guestName" placeholder="Masukkan Nama Tamu (Contoh: Cecep)" />
+    <input type="text" id="guestName" placeholder="Masukkan Nama Tamu (Contoh: Abdul)" />
     <button onclick="generateMessage()">Buat Pesan</button>
 
     <div id="outputBox" style="display: none;"></div>
@@ -75,7 +75,7 @@
     function generateMessage() {
       const nameInput = document.getElementById("guestName").value.trim();
       const guestName = nameInput || "Tamu Undangan";
-      const domain = "https://domain.com";
+      const domain = "http://elsa-wildan.web.id";
       const encodedName = encodeURIComponent(guestName);
       const url = `${domain}?to=${encodedName}`;
 
